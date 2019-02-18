@@ -1,0 +1,7 @@
+libaskarel.sh - a bash library
+
+This library contains a bunch of functions that i'm too lazy to copy/paste into my scripts.
+Those functions are going to make your life easier as a bash programmer.
+
+At the moment, it looks very stupid, but it will grow to support bigger applications,
+and i will move my code from several unrelated applications to it.

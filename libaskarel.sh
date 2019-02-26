@@ -78,6 +78,17 @@ catcsvheader()
     catcsv "$1" | head -n 1 | tr ';' ' '
 }
 
+# This function works the same than catcsv(), but ignore the first valid line (field header)
+# This is supposed to be the opposite of catcsvheader()
+# It will read the CSV file using the function catcsv()
+# Parameter 1: file name
+# Output: Same as catcsv(), minus the first valid line
+# See function catcsv() for other behavioural characteristics.
+catcsvbody()
+{
+    catcsv "$1" | tail -n +2 
+}
+
 ############### </FUNCTIONS> ###############
 
 ############### <MAIN> ###############

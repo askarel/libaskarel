@@ -26,7 +26,7 @@ EOF
 }
 
 ############### <RUNTIME VARS> ###############
-ME="$(basename "$0" .sh)"
+readonly ME="$(basename "$0" .sh)"
 ############### </RUNTIME VARS> ###############
 
 ############### <FUNCTIONS> ###############
@@ -54,6 +54,17 @@ check_prerequisites()
 	which "$1" > /dev/null || die "Command '$1' not found in path ($PATH)"
 	shift
     done
+}
+
+# This will cat a CSV file ans strip all the comments and empty lines from it
+# Parameter 1: file name
+# Output: cleaned input file, without comment or empty lines
+# Bombs out if the specified file is not regular or does not exist.
+catcsv()
+{
+    test -e "$1" || die "File '$1' not found"
+    test -f "$1" || die "'$1' is not a regular file"
+    cat "$1" | sed -e 's/\#.*//g; s/^\ *//g; /^$/d'
 }
 
 ############### </FUNCTIONS> ###############

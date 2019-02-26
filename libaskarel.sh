@@ -60,11 +60,22 @@ check_prerequisites()
 # Parameter 1: file name
 # Output: cleaned input file, without comment or empty lines
 # Bombs out if the specified file is not regular or does not exist.
+# A comment is the '#' sign
 catcsv()
 {
     test -e "$1" || die "File '$1' not found"
     test -f "$1" || die "'$1' is not a regular file"
     cat "$1" | sed -e 's/\#.*//g; s/^\ *//g; /^$/d'
+}
+
+# This function suppose the first valid line is the header with the name of the columns
+# It will read the CSV file using the function catcsv()
+# Parameter 1: file name
+# Output: space-separated field names, taken from the first valid line of the CSV file
+# See function catcsv() for other behavioural characteristics.
+catcsvheader()
+{
+    catcsv "$1" | head -n 1 | tr ';' ' '
 }
 
 ############### </FUNCTIONS> ###############
